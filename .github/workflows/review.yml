@@ -24,7 +24,7 @@ on:
         description: "Run on x86_64-darwin"
         required: true
         type: choice
-        default: yes_sandbox_relaxed
+        default: "no"
         options:
           - "no"
           - yes_sandbox_false
@@ -126,10 +126,10 @@ jobs:
           - system: ${{ inputs.aarch64-darwin == 'no' && 'aarch64-darwin' || '' }}
           - system: ${{ !inputs.riscv64-linux && 'riscv64-linux' || '' }}
     runs-on: >-
-      ${{ (matrix.system == 'x86_64-linux' && 'ubuntu-latest')
-      || (matrix.system == 'aarch64-linux' && 'ubuntu-24.04-arm')
+      ${{ (matrix.system == 'x86_64-linux' && 'ubuntu-26.04')
+      || (matrix.system == 'aarch64-linux' && 'ubuntu-26.04-arm')
       || (matrix.system == 'x86_64-darwin' && 'macos-latest')
-      || (matrix.system == 'aarch64-darwin' && 'macos-latest')
+      || (matrix.system == 'aarch64-darwin' && 'macos-26')
       || (matrix.system == 'riscv64-linux' && 'ubuntu-24.04-riscv') }}
 
     steps:
